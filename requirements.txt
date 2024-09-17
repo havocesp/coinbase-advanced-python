@@ -4,3 +4,4 @@ PyJWT==2.8.0
 requests==2.32.0
 rfc3986==2.0.0
 websocket-client==1.8.0
+security==1.3.1
