@@ -23,6 +23,7 @@ from coinbaseadvanced.models.products import BidAsksPage, ProductBook, ProductsP
 from coinbaseadvanced.models.accounts import AccountsPage, Account
 from coinbaseadvanced.models.orders import OrderEditPreview, OrderPlacementSource, OrdersPage, Order, OrderEdit, \
     OrderBatchCancellation, FillsPage, Side, StopDirection, OrderType
+from security import safe_requests
 
 
 class AuthSchema(Enum):
@@ -104,7 +105,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         if cursor is not None:
             query_params = query_params + '&cursor='+cursor
 
-        response = requests.get(self._base_url+request_path+query_params,
+        response = safe_requests.get(self._base_url+request_path+query_params,
                                 headers=headers,
                                 timeout=self.timeout)
 
@@ -150,7 +151,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(
+        response = safe_requests.get(
             self._base_url+request_path, headers=headers, timeout=self.timeout)
 
         account = Account.from_response(response)
@@ -527,7 +528,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(self._base_url+request_path+query_params,
+        response = safe_requests.get(self._base_url+request_path+query_params,
                                 headers=headers,
                                 timeout=self.timeout)
 
@@ -645,7 +646,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(self._base_url+request_path+query_params,
+        response = safe_requests.get(self._base_url+request_path+query_params,
                                 headers=headers,
                                 timeout=self.timeout)
 
@@ -697,7 +698,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(
+        response = safe_requests.get(
             self._base_url+request_path, headers=headers, timeout=self.timeout)
 
         order = Order.from_get_order_response(response)
@@ -739,7 +740,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(self._base_url+request_path+query_params,
+        response = safe_requests.get(self._base_url+request_path+query_params,
                                 headers=headers,
                                 timeout=self.timeout)
 
@@ -762,7 +763,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(
+        response = safe_requests.get(
             self._base_url+request_path, headers=headers, timeout=self.timeout)
 
         product = Product.from_response(response)
@@ -801,7 +802,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(self._base_url+request_path+query_params,
+        response = safe_requests.get(self._base_url+request_path+query_params,
                                 headers=headers,
                                 timeout=self.timeout)
 
@@ -877,7 +878,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(self._base_url+request_path+query_params,
+        response = safe_requests.get(self._base_url+request_path+query_params,
                                 headers=headers,
                                 timeout=self.timeout)
 
@@ -910,7 +911,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(
+        response = safe_requests.get(
             self._base_url+request_path+query_params, headers=headers, timeout=self.timeout)
 
         bid_asks_page = ProductBook.from_response(response)
@@ -937,7 +938,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(
+        response = safe_requests.get(
             self._base_url+request_path+query_params, headers=headers, timeout=self.timeout)
 
         bid_asks_page = BidAsksPage.from_response(response)
@@ -980,7 +981,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(self._base_url+request_path+query_params,
+        response = safe_requests.get(self._base_url+request_path+query_params,
                                 headers=headers,
                                 timeout=self.timeout)
 
@@ -1010,7 +1011,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         if portfolio_type is not None:
             query_params = '?portfolio_type='+portfolio_type.value
 
-        response = requests.get(self._base_url+request_path+query_params,
+        response = safe_requests.get(self._base_url+request_path+query_params,
                                 headers=headers,
                                 timeout=self.timeout)
 
@@ -1106,7 +1107,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(self._base_url+request_path,
+        response = safe_requests.get(self._base_url+request_path,
                                 headers=headers,
                                 timeout=self.timeout)
 
@@ -1162,7 +1163,7 @@ class CoinbaseAdvancedTradeAPIClient(object):
         headers = self._build_request_headers(method, request_path) if self._is_legacy_auth(
         ) else self._build_request_headers_for_cloud(method, self._host, request_path)
 
-        response = requests.get(
+        response = safe_requests.get(
             self._base_url+request_path, headers=headers, timeout=self.timeout)
 
         return UnixTime.from_response(response)
